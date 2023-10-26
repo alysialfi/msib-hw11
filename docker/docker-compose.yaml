@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: DockerFile
+    ports:
+    - '3031:3000'
+  database:
+    image: postgres
+    container_name: postgres
+    env_file:
+      - ../postgres-env.list
+    volumes:
+     - postgresvolume:/pgdata
+    ports:
+     - '5433:5432'
+    networks:
+      - postgresnetwork
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    env_file:
+      - ../pgadmin-env.list
+    volumes:
+     - pgadminvolume:/var/lib/pgadmin
+    ports:
+     - '8088:80'
+    depends_on:
+      - database
+    networks:
+      - postgresnetwork
+
+networks:
+  postgresnetwork:
+
+volumes:
+  postgresvolume:
+  pgadminvolume:
