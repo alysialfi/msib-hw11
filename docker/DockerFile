@@ -2,10 +2,11 @@ FROM node
 
 WORKDIR /app
 
-COPY ./package*.json ./
+# aligned to context path
+COPY package*.json ./
 
-RUN npm i
+RUN npm install
 
 COPY . .
 
-CMD [ "npm", "run", "dev", "||", "npm", "run", "test" ]
+CMD [ "npm", "run", "dev" ]
