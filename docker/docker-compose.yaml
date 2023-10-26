@@ -1,11 +1,11 @@
 version: '3.8'
 services:
-  app:
-    build:
-      context: .
-      dockerfile: DockerFile
-    ports:
-    - '3031:3000'
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: DockerFile
+  #   ports:
+  #   - '3031:3000'
   database:
     image: postgres
     container_name: postgres
