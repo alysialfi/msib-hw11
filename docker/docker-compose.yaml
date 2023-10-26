@@ -1,18 +1,24 @@
 version: '3.8'
 services:
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: DockerFile
-  #   ports:
-  #   - '3031:3000'
+  app:
+    build:
+      # path to parent directory
+      context: ..
+      # back to docker directory
+      dockerfile: docker/DockerFile
+    ports:
+      - '3031:3000'
+    depends_on:
+      - database
+    networks:
+      - postgresnetwork
   database:
     image: postgres
     container_name: postgres
     env_file:
       - ../postgres-env.list
     volumes:
-     - postgresvolume:/pgdata
+     - postgresvolume:/var/lib/postgresql/data
     ports:
      - '5433:5432'
     networks:
